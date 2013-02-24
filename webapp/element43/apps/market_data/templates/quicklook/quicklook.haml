@@ -5,7 +5,7 @@
   = block.super
   Market - {{type.name}}
 - block content
-  - include 'market/_group_breadcrumbs.haml'
+  - include '_group_breadcrumbs.haml'
   .row-fluid
     .span2
         -# Tabs
@@ -130,9 +130,9 @@
           %i
             Loading regional data - this can take some seconds...
         #bid.tab-pane.fade
-          - include 'market/quicklook/_quicklook_bid.haml'
+          - include 'quicklook/_quicklook_bid.haml'
         #ask.tab-pane.fade
-          - include 'market/quicklook/_quicklook_ask.haml'
+          - include 'quicklook/_quicklook_ask.haml'
         #mats.tab-pane.fade
           %table.table.table-striped.table-condensed
             %thead

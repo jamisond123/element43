@@ -5,7 +5,7 @@
   = block.super
   Market - {{region.name}} - {{type.name}}
 - block content
-  - include 'market/_group_breadcrumbs.haml'
+  - include '_group_breadcrumbs.haml'
   .row-fluid
     .span2
         -# Tabs
@@ -102,9 +102,9 @@
                 %i.icon-white.icon-chevron-right
                 More
         #ask.tab-pane.fade
-          - include 'market/quicklook/_quicklook_ask.haml'
+          - include 'quicklook/_quicklook_ask.haml'
         #bid.tab-pane.fade
-          - include 'market/quicklook/_quicklook_bid.haml'
+          - include 'quicklook/_quicklook_bid.haml'
         #systems.tab-pane.fade
           %img{'src':'/static/images/loading.gif'}
           %i
