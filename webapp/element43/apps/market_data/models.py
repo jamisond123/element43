@@ -93,6 +93,7 @@ class ItemRegionStat(models.Model):
     class Meta(object):
         verbose_name = "Stat Data"
         verbose_name_plural = "Stats Data"
+        unique_together = ("mapregion", "invtype")
 
 class ItemRegionStatHistory(models.Model):
     """
@@ -119,6 +120,7 @@ class ItemRegionStatHistory(models.Model):
     class Meta(object):
         verbose_name = "Stat History Data"
         verbose_name_plural = "Stat History Data"
+        unique_together = ("mapregion", "invtype", "date")
 
 class History(models.Model):
     """
@@ -154,14 +156,19 @@ class OrderHistory(models.Model):
     mean = models.FloatField(help_text="mean price of orders for this item/region")
     quantity = models.BigIntegerField(help_text="quantity of item sold for this item/region")
 
+    class Meta(object):
+        verbose_name = "Uncompressed History Data"
+        verbose_name_plural = "Uncompressed History Data"
+        unique_together = ("mapregion", "invtype", "date")
+
 class ActiveOrdersManager(models.Manager):
     """
     Custom manager that only returns active orders.
 
     Example: Get all active orders --> Orders.active.all()
     """
-    def get_query_set(self):
-        return super(ActiveOrdersManager, self).get_query_set().filter(is_active=True)
+    def get_queryset(self):
+        return super(ActiveOrdersManager, self).get_queryset().filter(is_active=True)
 
 class ArchivedOrdersManager(models.Manager):
     """
@@ -169,8 +176,8 @@ class ArchivedOrdersManager(models.Manager):
 
     Example: Get all archived orders --> Orders.archived.all()
     """
-    def get_query_set(self):
-        return super(ArchivedOrdersManager, self).get_query_set().filter(is_active=False)
+    def get_queryset(self):
+        return super(ArchivedOrdersManager, self).get_queryset().filter(is_active=False)
 
 class Orders(models.Model):
     """
@@ -222,6 +229,7 @@ class Orders(models.Model):
     class Meta(object):
         verbose_name = "Market Order"
         verbose_name_plural = "Market Orders"
+        index_together = ["mapregion", "invtype", "is_active"]
 
 class ArchivedOrders(models.Model):
     """
